@@ -1,0 +1,34 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+group = 'com.vinted'
+version = '1.0.0'
+
+sourceCompatibility = 1.7
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'commons-codec:commons-codec:1.9'
+    compile 'com.google.code.gson:gson:2.2.+'
+
+    testCompile 'junit:junit:4.11'
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+}
