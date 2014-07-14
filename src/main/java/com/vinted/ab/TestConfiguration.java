@@ -2,6 +2,7 @@ package com.vinted.ab;
 
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.binary.Hex;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class TestConfiguration {
      * @return List of running tests assigned to user
      */
     public List<AbTest> getRunningTests(String identifier) {
-        String hex = DigestUtils.sha256Hex(salt + identifier);
+        String hex = new String(Hex.encodeHex(DigestUtils.sha256(salt + identifier)));
         BigInteger bucketId = new BigInteger(hex, 16).mod(BigInteger.valueOf(bucketCount));
 
         List<AbTest> tests = new ArrayList<>();
