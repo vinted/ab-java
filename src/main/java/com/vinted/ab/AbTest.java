@@ -4,14 +4,13 @@ import com.google.gson.annotations.SerializedName;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 
-import javax.xml.bind.DatatypeConverter;
 import java.math.BigInteger;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class AbTest {
+
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 
     @SerializedName("name")
     private String name;
@@ -96,11 +95,11 @@ public class AbTest {
         Date startDate = parseDate(startAt);
         Date endDate = parseDate(endAt);
 
-        if (startDate == null && endDate != null) {
+        if (endDate != null) {
             return now.before(endDate);
         }
 
-        if (startDate != null && endDate == null) {
+        if (startDate != null) {
             return now.after(startDate);
         }
 
@@ -112,7 +111,7 @@ public class AbTest {
 
         if (date != null) {
             try {
-                result = DatatypeConverter.parseDate(date).getTime();
+                result = DATE_FORMAT.parse(date);
             } catch (Exception ignored) {
             }
         }
