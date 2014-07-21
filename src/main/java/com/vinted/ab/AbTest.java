@@ -1,8 +1,7 @@
 package com.vinted.ab;
 
 import com.google.gson.annotations.SerializedName;
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
+import com.vinted.ab.security.DigestUtils;
 
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
@@ -63,7 +62,7 @@ public class AbTest {
     }
 
     public AbTestVariant getAssignedVariant(String identifier) {
-        String hex = new String(Hex.encodeHex(DigestUtils.sha256(seed + identifier)));
+        String hex = DigestUtils.sha256Hex(seed + identifier);
         int variantId = new BigInteger(hex, 16).mod(BigInteger.valueOf(positiveWeightSum())).intValue();
 
         int sum = 0;
