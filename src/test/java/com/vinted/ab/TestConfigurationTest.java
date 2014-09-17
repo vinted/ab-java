@@ -25,13 +25,16 @@ public class TestConfigurationTest {
     public void setUp() {
         folders.add("all_buckets");
         folders.add("already_finished");
+        folders.add("already_finished_no_start_date");
         folders.add("big_weights");
         folders.add("explicit_times");
         folders.add("few_buckets");
         folders.add("has_not_started");
+        folders.add("has_not_started_with_end_date");
         folders.add("multiple_tests");
         folders.add("multiple_variants");
         folders.add("no_buckets");
+        folders.add("no_end_date");
         folders.add("no_variants");
         folders.add("zero_buckets");
         folders.add("zero_weight");

@@ -1,0 +1,20 @@
+{
+    "salt": "2",
+    "bucket_count": 333,
+    "ab_tests": [
+        {
+            "id": 2,
+            "name": "has_not_started_with_end_date",
+            "seed": "2",
+            "start_at": "2444-01-01T00:00:00+0000",
+            "end_at": "2455-01-01T00:00:00+0000",
+            "all_buckets": true,
+            "variants": [
+                {
+                    "name": "green",
+                    "chance_weight": 1
+                }
+            ]
+        }
+    ]
+}

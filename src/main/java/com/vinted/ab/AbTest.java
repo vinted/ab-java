@@ -95,11 +95,15 @@ public class AbTest {
         Date startDate = parseDate(startAt);
         Date endDate = parseDate(endAt);
 
-        if (endDate != null) {
+        if (startDate == null && endDate == null) {
+            return true;
+        }
+
+        if (startDate == null && endDate != null) {
             return now.before(endDate);
         }
 
-        if (startDate != null) {
+        if (startDate != null && endDate == null) {
             return now.after(startDate);
         }
 
