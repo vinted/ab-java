@@ -32,3 +32,9 @@ publishing {
         }
     }
 }
+
+test {
+  testLogging {
+    events 'started', 'passed'
+  }
+}
