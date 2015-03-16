@@ -16,6 +16,7 @@ import java.util.Set;
 import static java.util.Map.Entry;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class TestConfigurationTest {
 
@@ -61,6 +62,27 @@ public class TestConfigurationTest {
                             assertEquals(format(set, identifier, variant, test.getAbTest()), variant, test.getName());
                         }
                     }
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testAllTests() {
+        String set = "already_finished_all_test_query";
+        TestConfiguration input = read(TestConfiguration.class, String.format("/%s/input.json", set));
+        TestOutput output = read(TestOutput.class, String.format("/%s/output.json", set));
+
+        for (Entry<String, JsonElement> element : output.variants.entrySet()) {
+            String variant = element.getKey();
+
+            for (String identifier : output.get(variant)) {
+                List<AbTestVariant> assignedTestVariants = input.getAllTestVariantsForTest(identifier, output.testName);
+
+                assertFalse(assignedTestVariants.isEmpty());
+
+                for (AbTestVariant test : assignedTestVariants) {
+                    assertEquals(format(set, identifier, variant, test.getAbTest()), variant, test.getName());
                 }
             }
         }
